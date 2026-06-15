@@ -144,10 +144,4 @@ if __name__ == "__main__":
     initialize_environment()
     cleaned_dataframe = run_data_pipeline(RAW_DATA_PATH, CLEAN_DATA_PATH)
     generate_business_graphics(cleaned_dataframe)
-    print("🎉 Entire portfolio pipeline has executed flawlessly!")
-
-    # Add all new code, data schemas, and visualization graphics
-git add notebooks/ outputs/ data/netflix_cleaned.csv
-
-# Commit with professional engineering notation
-git commit -m "Completed core analytics engine: functionalized data cleaner and generated executive visuals"
+    print(" Entire portfolio pipeline has executed flawlessly!")

@@ -30,3 +30,23 @@ df['metadata_soup'] = (
 
 # Clean up casing to ensure matching uniformity
 df['metadata_soup'] = df['metadata_soup'].str.lower()
+
+
+# =====================================================================
+# 2. MATHEMATICAL VECTORIZATION & SIMILARITY MATRIX
+# =====================================================================
+print("🧮 Initializing TF-IDF Vectorizer and eliminating stop words...")
+# stop_words='english' removes meaningless structural filler text like 'and', 'the', 'is'
+tfidf = TfidfVectorizer(stop_words='english')
+
+# Construct the TF-IDF feature matrix
+tfidf_matrix = tfidf.fit_transform(df['metadata_soup'])
+print(f"📊 Matrix constructed with shape: {tfidf_matrix.shape}")
+
+print("📐 Computing multi-dimensional Cosine Similarity Matrix...")
+# Compute the linear dot product to get the similarity matrix scores
+cosine_sim = cosine_similarity(tfidf_matrix, tfidf_matrix)
+
+# Create a reverse mapping sequence of titles and dataframe indices 
+# This helps us instantly look up a movie's row number by typing its name
+indices = pd.Series(df.index, index=df['title'].str.lower()).drop_duplicates()

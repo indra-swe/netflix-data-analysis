@@ -27,3 +27,6 @@ df['metadata_soup'] = (
     df['cast'] + " " + 
     df['director']
 )
+
+# Clean up casing to ensure matching uniformity
+df['metadata_soup'] = df['metadata_soup'].str.lower()

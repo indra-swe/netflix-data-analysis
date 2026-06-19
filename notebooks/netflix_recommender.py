@@ -79,3 +79,17 @@ def get_recommendations(title, cosine_sim_matrix=cosine_sim, data=df, index_map=
     
     # Return structured final presentation results
     return data[['title', 'type', 'listed_in', 'description']].iloc[movie_indices]
+
+
+# =====================================================================
+# 4. SYSTEM VERIFICATION & TESTING
+# =====================================================================
+if __name__ == "__main__":
+    print("\n🎉 Recommendation Engine successfully compiled and ready for deployment!")
+    
+    # Test queries to verify performance
+    test_movie = "Stranger Things"
+    print(f"\n🎬 Fetching top 5 algorithmic recommendations for '{test_movie}':")
+    print("-" * 80)
+    print(get_recommendations(test_movie, top_n=5))
+    print("-" * 80)

@@ -46,3 +46,30 @@ def load_and_vectorize_data():
 # Load cache components safely
 df, cosine_sim, indices = load_and_vectorize_data()
 
+# =====================================================================
+# INTERACTIVE INTERFACE LAYER
+# =====================================================================
+# Dropdown menu containing sorted alphabetically list of all titles
+selected_title = st.selectbox("Search Catalog Asset:", sorted(df['title'].unique()))
+
+if st.button("Generate Recommendations"):
+    idx = indices[selected_title]
+    
+    # If a title has duplicate entries, pick the first index instance safely
+    if isinstance(idx, pd.Series):
+        idx = idx.iloc[0]
+        
+    sim_scores = list(enumerate(cosine_sim[idx]))
+    sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+    sim_scores = sim_scores[1:6] # Top 5 selections
+    
+    movie_indices = [i[0] for i in sim_scores]
+    recommendations = df[['title', 'type', 'listed_in', 'description']].iloc[movie_indices]
+    
+    st.markdown("### 🍿 Top Algorithmic Matches:")
+    for i, row in recommendations.iterrows():
+        with st.container():
+            st.markdown(f"#### 🎥 {row['title']} ({row['type']})")
+            st.markdown(f"**🎭 Genres:** *{row['listed_in']}*")
+            st.markdown(f"**📝 Synopsis:** {row['description']}")
+            st.markdown("---")

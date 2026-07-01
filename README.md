@@ -29,6 +29,7 @@ This repository delivers an enterprise-grade data science framework that inspect
 ├── dashboards/
 │   └── netflix_dashboard.pbix     # Dark-theme Power BI executive workspace file
 └── requirements.txt               # System dependencies configuration
+```
 ⚙️ Data Engineering & Pipeline Transformations
 Raw streaming metadata is unstructured and inconsistent. This pipeline implements a functionalized Python preprocessing engine:
 
